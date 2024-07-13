@@ -1,5 +1,6 @@
 package com.project.productservice.controllers;
 
+import com.project.productservice.exceptions.ProductNotFoundException;
 import com.project.productservice.models.Product;
 import com.project.productservice.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable("id") long id) {
+    public ResponseEntity<Product> getProductById(@PathVariable("id") long id) throws ProductNotFoundException {
         return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
