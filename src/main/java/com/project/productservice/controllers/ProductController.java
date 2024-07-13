@@ -42,6 +42,11 @@ public class ProductController {
         return productService.replaceProduct(id, product);
     }
 
+    @PostMapping()
+    public Product addProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
+    }
+
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<?> handleException(Exception exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
