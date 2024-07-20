@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //https://fakestoreapi.com/docs
 
-@Service
+@Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService {
 
     private final RestTemplate restTemplate;
@@ -65,13 +65,13 @@ public class FakeStoreProductService implements ProductService {
     }
 
     @Override
-    public Product deleteProduct(long productId) {
+    public void deleteProduct(long productId) {
         RequestCallback requestCallback = restTemplate.httpEntityCallback(null);
         HttpMessageConverterExtractor<FakeStoreProductDto> responseExtractor = new HttpMessageConverterExtractor(FakeStoreProductDto.class,
                 restTemplate.getMessageConverters());
         FakeStoreProductDto response = restTemplate.execute("https://fakestoreapi.com/products/" + productId,
                 HttpMethod.DELETE, requestCallback, responseExtractor);
-        return convertFakeStoreProductDtoToProduct(response);
+//        return convertFakeStoreProductDtoToProduct(response);
     }
 
     @Override

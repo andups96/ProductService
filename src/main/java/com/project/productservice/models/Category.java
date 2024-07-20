@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Category extends BaseModel {
-    private long id;
+    private Long id;
     private String name;
     private String description;
 }

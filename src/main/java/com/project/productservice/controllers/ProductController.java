@@ -4,6 +4,7 @@ import com.project.productservice.exceptions.ProductNotFoundException;
 import com.project.productservice.models.Product;
 import com.project.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
+    @Qualifier("selfProductService")
     private ProductService productService;
 
     @GetMapping()
@@ -28,17 +30,17 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public Product deleteProduct(Long productId) {
-        return productService.deleteProduct(productId);
+    public void deleteProduct(@PathVariable("id") Long productId) {
+         productService.deleteProduct(productId);
     }
 
     @PatchMapping("/{id}")
-    public Product updateProduct(@PathVariable("id") long productId, @RequestBody Product product) {
+    public Product updateProduct(@PathVariable("id") long productId, @RequestBody Product product) throws ProductNotFoundException {
         return productService.updateProduct(productId, product);
     }
 
     @PutMapping("/{id}")
-    public Product replaceProduct(@PathVariable("id") long id, @RequestBody Product product) {
+    public Product replaceProduct(@PathVariable("id") long id, @RequestBody Product product) throws ProductNotFoundException {
         return productService.replaceProduct(id, product);
     }
 
