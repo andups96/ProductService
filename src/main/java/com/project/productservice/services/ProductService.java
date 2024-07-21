@@ -11,11 +11,11 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    Product updateProduct(long productId, Product product);
+    Product updateProduct(long productId, Product product) throws ProductNotFoundException;
 
-    Product replaceProduct(long productId, Product product);
+    Product replaceProduct(long productId, Product product) throws ProductNotFoundException;
 
-    Product deleteProduct(long productId);
+    void deleteProduct(long productId);
 
     Product addProduct(Product product);
 }
